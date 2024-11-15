@@ -112,6 +112,27 @@
             }
         }
     });
+
+    // RSVP form submission
+    $('#rsvp').submit(function (e) {
+        e.preventDefault();
+
+        var form = $(this);
+        var messageContainer = $('#message-container');
+
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            success: function (response) {
+                messageContainer.html(response);
+            },
+            error: function () {
+                messageContainer.html('<div id="error-message">Error submitting form.</div>');
+            }
+        });
+    });
+
     
 })(jQuery);
 
